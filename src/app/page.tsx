@@ -456,15 +456,11 @@ export default function TelepathSite() {
           <RevealDiv>
             <div style={{
               width: "100%", aspectRatio: "4/5", borderRadius: 16,
-              background: `linear-gradient(160deg, ${T.greenPale}, ${T.greenLt})`,
-              display: "flex", alignItems: "center", justifyContent: "center",
               position: "relative", overflow: "hidden",
             }}>
-              <div style={{ fontSize: 14, color: T.greenDk, fontWeight: 500, letterSpacing: 1, textAlign: "center" }}>
-                <LogoMark size={80}/>
-                <div style={{ marginTop: 16 }}>Your Photo Here</div>
-              </div>
-              <div style={{ position: "absolute", bottom: -20, right: -20, width: 120, height: 120, borderRadius: "50%", background: T.green, opacity: 0.1 }}/>
+              <img src="/headshot.jpg" alt="Chris Pfeifer — Founder, Telepath Technology Solutions" style={{
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", borderRadius: 16,
+              }}/>
             </div>
           </RevealDiv>
           <RevealDiv delay={0.15}>

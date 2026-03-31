@@ -452,14 +452,15 @@ export default function TelepathSite() {
 
       {/* ─── ABOUT ─── */}
       <section id="about" style={{ ...sectionPad, background: T.white }}>
-        <div style={{ ...container, display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 60, alignItems: "center" }}>
+        <div style={{ ...container, display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 60, alignItems: "stretch" }}>
           <RevealDiv>
             <div style={{
-              width: "100%", aspectRatio: "4/5", borderRadius: 16,
+              width: "100%", borderRadius: 16,
               position: "relative", overflow: "hidden",
+              height: "100%",
             }}>
               <img src="/headshot.jpg" alt="Chris Pfeifer — Founder, Telepath Technology Solutions" style={{
-                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", borderRadius: 16,
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", borderRadius: 16,
               }}/>
             </div>
           </RevealDiv>

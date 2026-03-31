@@ -128,6 +128,8 @@ function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWordmark?: 
             <circle key={`pr${i}`} cx="0" cy="0" r="9" fill="none" stroke="#1D9E75" strokeWidth="1"
               style={{
                 opacity: phase >= 2 ? undefined : 0,
+                transformOrigin: "center",
+                transformBox: "fill-box" as const,
                 animation: phase >= 2 ? `telepath-pulse 3s ease-in-out ${2 + i * 0.6}s infinite` : "none",
               }}/>
           ))}
@@ -459,7 +461,7 @@ export default function TelepathSite() {
               position: "relative", overflow: "hidden",
             }}>
               <img src="/headshot.jpg" alt="Chris Pfeifer — Founder, Telepath Technology Solutions" style={{
-                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", borderRadius: 16,
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 35%", borderRadius: 16,
               }}/>
             </div>
           </RevealDiv>
@@ -722,10 +724,10 @@ export default function TelepathSite() {
       <style>{`
         @keyframes pulse-scroll { 0%,100% { opacity: 0.3; } 50% { opacity: 0.8; } }
         @keyframes telepath-pulse {
-          0%   { opacity: 0; r: 9; }
+          0%   { opacity: 0; transform: scale(1); }
           15%  { opacity: 0.35; }
-          50%  { opacity: 0; r: 28; }
-          100% { opacity: 0; r: 28; }
+          50%  { opacity: 0; transform: scale(3.1); }
+          100% { opacity: 0; transform: scale(3.1); }
         }
         @media (max-width: 1024px) {
           section > div { grid-template-columns: 1fr !important; }

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-const SECTIONS = ["home","services","case-studies","about","testimonials","pricing","blog","contact"];
+const SECTIONS = ["home","services","case-studies","about","testimonials","pricing","contact"];
 
 /* ───────── palette matched to logo ───────── */
 const T = {
@@ -20,7 +20,7 @@ const T = {
 
 /* ───────── Intersection Observer hook ───────── */
 function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -56,19 +56,19 @@ function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWordmark?: 
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
-  const edgeStyle = (delay: number) => ({
+  const edgeStyle = (delay) => ({
     stroke: "currentColor",
     transition: `stroke-dashoffset 1s ease ${delay}s`,
     strokeDasharray: 60,
     strokeDashoffset: phase >= 1 ? 0 : 60,
   });
 
-  const nodeStyle = (delay: number) => ({
+  const nodeStyle = (delay) => ({
     opacity: phase >= 2 ? 1 : 0,
     transition: `opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`,
     transform: phase >= 2 ? "scale(1)" : "scale(0)",
     transformOrigin: "center",
-    transformBox: "fill-box" as const,
+    transformBox: "fill-box",
   });
 
   const wmStyle = {
@@ -177,8 +177,8 @@ function LogoMark({ size = 36 }: { size?: number }) {
 
 /* ───────── Icons ───────── */
 function Icon({ name, size = 24 }: { name: string; size?: number }) {
-  const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  const icons: Record<string, React.ReactNode> = {
+  const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" };
+  const icons = {
     strategy: <svg viewBox="0 0 24 24" style={s}><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>,
     code: <svg viewBox="0 0 24 24" style={s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
     shield: <svg viewBox="0 0 24 24" style={s}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
@@ -218,7 +218,7 @@ function Btn({ children, variant = "primary", onClick, style: extra = {} }: { ch
     outline: { ...base, background: "transparent", color: T.green, border: `1.5px solid ${T.green}`, ...extra },
     white:   { ...base, background: T.white, color: T.green, ...extra },
   };
-  return <button style={variants[variant]} onClick={onClick} onMouseEnter={e => { (e.target as HTMLElement).style.transform = "translateY(-2px)"; (e.target as HTMLElement).style.boxShadow = "0 4px 16px rgba(29,158,117,0.25)"; }} onMouseLeave={e => { (e.target as HTMLElement).style.transform = "translateY(0)"; (e.target as HTMLElement).style.boxShadow = "none"; }}>{children}</button>;
+  return <button style={variants[variant]} onClick={onClick} onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 4px 16px rgba(29,158,117,0.25)"; }} onMouseLeave={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "none"; }}>{children}</button>;
 }
 
 /* ═══════════════════════════════════════════ */
@@ -245,7 +245,7 @@ export default function TelepathSite() {
     return () => obs.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -296,7 +296,7 @@ export default function TelepathSite() {
           </div>
           {/* Desktop nav links — centered */}
           <div style={{ display: "flex", alignItems: "center", gap: 32, position: "absolute", left: "50%", transform: "translateX(-50%)" }} className="desktop-nav">
-            {[["services","Services"],["case-studies","Case Studies"],["about","About"],["blog","Insights"],["contact","Contact"]].map(([id, label]) => (
+            {[["services","Services"],["case-studies","Case Studies"],["about","About"],["contact","Contact"]].map(([id, label]) => (
               <button key={id} onClick={() => scrollTo(id)} style={{
                 background: "none", border: "none", cursor: "pointer",
                 fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 500,
@@ -321,7 +321,7 @@ export default function TelepathSite() {
       {menuOpen && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(255,255,255,0.98)", zIndex: 999, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28 }}>
           <button onClick={() => setMenuOpen(false)} style={{ position: "absolute", top: 20, right: 24, background: "none", border: "none", fontSize: 28, cursor: "pointer" }}>&#x00d7;</button>
-          {[["home","Home"],["services","Services"],["case-studies","Case Studies"],["about","About"],["blog","Insights"],["contact","Contact"]].map(([id, label]) => (
+          {[["home","Home"],["services","Services"],["case-studies","Case Studies"],["about","About"],["contact","Contact"]].map(([id, label]) => (
             <button key={id} onClick={() => scrollTo(id)} style={{ background: "none", border: "none", fontSize: 20, fontWeight: 500, color: T.charcoal, cursor: "pointer" }}>{label}</button>
           ))}
         </div>
@@ -555,42 +555,6 @@ export default function TelepathSite() {
                     ))}
                   </div>
                   <Btn variant={plan.accent ? "white" : "primary"} onClick={() => scrollTo("contact")} style={{ width: "100%", textAlign: "center" }}>Get Started</Btn>
-                </div>
-              </RevealDiv>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── BLOG / INSIGHTS ─── */}
-      <section id="blog" style={{ ...sectionPad, background: T.bg }}>
-        <div style={container}>
-          <RevealDiv style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 64px" }}>
-            <SectionLabel>Insights</SectionLabel>
-            <SectionTitle>Thoughts on technology leadership.</SectionTitle>
-          </RevealDiv>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
-            {[
-              { date: "March 2026", tag: "Strategy", title: "When to Hire Your First VP of Engineering", desc: "The inflection point isn't headcount — it's when your technical decisions start outpacing your ability to be in every room." },
-              { date: "February 2026", tag: "Architecture", title: "The True Cost of Technical Debt", desc: "Most founders underestimate technical debt by 3x. Here's a framework for quantifying it and making the business case for paying it down." },
-              { date: "January 2026", tag: "Leadership", title: "Building Engineering Culture Before You Have Engineers", desc: "The culture decisions you make with your first 3 hires will define your engineering org at 100. Start intentionally." },
-            ].map((post, i) => (
-              <RevealDiv key={i} delay={i * 0.1} style={{
-                background: T.white, borderRadius: 12, overflow: "hidden",
-                border: `1px solid ${T.greenPale}`,
-                cursor: "pointer", transition: "all 0.3s ease",
-              }}>
-                <div style={{ height: 6, background: `linear-gradient(90deg, ${T.green}, ${T.greenMd})` }}/>
-                <div style={{ padding: 32 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                    <span style={{ fontSize: 12, fontWeight: 600, letterSpacing: 1, textTransform: "uppercase", color: T.green, background: T.greenPale, padding: "4px 10px", borderRadius: 4 }}>{post.tag}</span>
-                    <span style={{ fontSize: 13, color: T.silver }}>{post.date}</span>
-                  </div>
-                  <h3 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 22, fontWeight: 400, color: T.charcoal, margin: "0 0 12px", lineHeight: 1.3 }}>{post.title}</h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.7, color: T.slate, margin: "0 0 20px" }}>{post.desc}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 600, color: T.green }}>
-                    Read More <Icon name="arrow" size={16}/>
-                  </div>
                 </div>
               </RevealDiv>
             ))}

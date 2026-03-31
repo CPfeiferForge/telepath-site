@@ -20,7 +20,7 @@ const T = {
 
 /* ───────── Intersection Observer hook ───────── */
 function useReveal() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -56,19 +56,19 @@ function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWordmark?: 
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
-  const edgeStyle = (delay) => ({
+  const edgeStyle = (delay: number) => ({
     stroke: "currentColor",
     transition: `stroke-dashoffset 1s ease ${delay}s`,
     strokeDasharray: 60,
     strokeDashoffset: phase >= 1 ? 0 : 60,
   });
 
-  const nodeStyle = (delay) => ({
+  const nodeStyle = (delay: number) => ({
     opacity: phase >= 2 ? 1 : 0,
     transition: `opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`,
     transform: phase >= 2 ? "scale(1)" : "scale(0)",
     transformOrigin: "center",
-    transformBox: "fill-box",
+    transformBox: "fill-box" as const,
   });
 
   const wmStyle = {
@@ -177,8 +177,8 @@ function LogoMark({ size = 36 }: { size?: number }) {
 
 /* ───────── Icons ───────── */
 function Icon({ name, size = 24 }: { name: string; size?: number }) {
-  const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round", strokeLinejoin: "round" };
-  const icons = {
+  const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const icons: Record<string, React.ReactNode> = {
     strategy: <svg viewBox="0 0 24 24" style={s}><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>,
     code: <svg viewBox="0 0 24 24" style={s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
     shield: <svg viewBox="0 0 24 24" style={s}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
@@ -218,7 +218,7 @@ function Btn({ children, variant = "primary", onClick, style: extra = {} }: { ch
     outline: { ...base, background: "transparent", color: T.green, border: `1.5px solid ${T.green}`, ...extra },
     white:   { ...base, background: T.white, color: T.green, ...extra },
   };
-  return <button style={variants[variant]} onClick={onClick} onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 4px 16px rgba(29,158,117,0.25)"; }} onMouseLeave={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "none"; }}>{children}</button>;
+  return <button style={variants[variant]} onClick={onClick} onMouseEnter={e => { (e.target as HTMLElement).style.transform = "translateY(-2px)"; (e.target as HTMLElement).style.boxShadow = "0 4px 16px rgba(29,158,117,0.25)"; }} onMouseLeave={e => { (e.target as HTMLElement).style.transform = "translateY(0)"; (e.target as HTMLElement).style.boxShadow = "none"; }}>{children}</button>;
 }
 
 /* ═══════════════════════════════════════════ */
@@ -245,7 +245,7 @@ export default function TelepathSite() {
     return () => obs.disconnect();
   }, []);
 
-  const scrollTo = (id) => {
+  const scrollTo = (id: string) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };

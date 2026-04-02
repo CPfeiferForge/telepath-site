@@ -469,8 +469,7 @@ export default function TelepathSite() {
               position: "relative", overflow: "hidden",
             }}>
               <img src="/headshot.jpg" alt="Chris Pfeifer — Founder, Telepath Technology Solutions" style={{
-                width: "100%", height: "110%", objectFit: "cover", objectPosition: "center 25%", borderRadius: 16,
-                marginTop: "-5%",
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%", borderRadius: 16,
               }}/>
             </div>
           </RevealDiv>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-const SECTIONS = ["home","services","case-studies","about","testimonials","pricing","contact"];
+const SECTIONS = ["home","services","case-studies","about","pricing","contact"];
 
 /* ───────── palette matched to logo ───────── */
 const T = {
@@ -182,6 +182,7 @@ function Icon({ name, size = 24 }: { name: string; size?: number }) {
   const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const icons: Record<string, React.ReactNode> = {
     ai: <svg viewBox="0 0 24 24" style={s}><path d="M12 2a6 6 0 00-6 6c0 2.22 1.21 4.16 3 5.2V15a1 1 0 001 1h4a1 1 0 001-1v-1.8c1.79-1.04 3-2.98 3-5.2a6 6 0 00-6-6z"/><line x1="10" y1="18" x2="14" y2="18"/><line x1="10" y1="20" x2="14" y2="20"/><line x1="11" y1="22" x2="13" y2="22"/><line x1="8" y1="6" x2="4" y2="4"/><line x1="16" y1="6" x2="20" y2="4"/><line x1="6" y1="10" x2="2" y2="10"/><line x1="18" y1="10" x2="22" y2="10"/></svg>,
+    scissors: <svg viewBox="0 0 24 24" style={s}><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>,
     strategy: <svg viewBox="0 0 24 24" style={s}><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>,
     code: <svg viewBox="0 0 24 24" style={s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
     shield: <svg viewBox="0 0 24 24" style={s}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
@@ -376,8 +377,8 @@ export default function TelepathSite() {
               Telepath Technology Solutions provides seasoned CTO-level guidance to startups and scaling companies. Strategy, architecture, team building — on your terms.
             </p>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-              <Btn onClick={() => scrollTo("contact")}>Schedule a Discovery Call</Btn>
-              <Btn variant="outline" onClick={() => scrollTo("services")}>Explore Services</Btn>
+              <Btn onClick={() => scrollTo("contact")}>Book a Discovery Call</Btn>
+              <Btn variant="outline" onClick={() => scrollTo("services")}>Explore Our Services</Btn>
             </div>
           </RevealDiv>
         </div>
@@ -404,6 +405,7 @@ export default function TelepathSite() {
               { icon: "shield", title: "Security & Compliance", desc: "Security audits, compliance roadmaps (SOC 2, HIPAA, GDPR), vendor risk assessment, and incident response planning." },
               { icon: "cloud", title: "Cloud & Infrastructure", desc: "Cloud architecture, DevOps strategy, CI/CD pipelines, cost optimization, and scalability planning." },
               { icon: "zap", title: "Digital Transformation", desc: "Legacy modernization, AI/ML integration strategy, process automation, and technology-driven innovation." },
+              { icon: "scissors", title: "Technology Audits & Cost Optimization", desc: "Comprehensive tech stack audits, elimination of redundant tools and licenses, vendor consolidation, and strategic cost reduction that streamlines operations without sacrificing capability." },
             ].map((svc, i) => (
               <RevealDiv key={i} delay={i * 0.08} style={{
                 background: T.light, borderRadius: 12, padding: 36,
@@ -429,9 +431,9 @@ export default function TelepathSite() {
           </RevealDiv>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 28 }}>
             {[
-              { tag: "HealthTech Startup", title: "From MVP to Series A in 8 months", metric: "3.2M", metricLabel: "Raised in Series A", desc: "Designed the technical architecture, built the engineering team from 0 to 8, and established the development processes that gave investors confidence." },
-              { tag: "E-Commerce Platform", title: "60% reduction in infrastructure costs", metric: "60%", metricLabel: "Cost Reduction", desc: "Audited cloud spend, re-architected for serverless, and implemented auto-scaling — saving $400K annually while improving uptime to 99.97%." },
-              { tag: "FinTech Scale-Up", title: "SOC 2 compliance in 12 weeks", metric: "12wk", metricLabel: "To Compliance", desc: "Led the security transformation, implemented controls, and guided the team through audit — unlocking enterprise sales pipeline worth $2M ARR." },
+              { tag: "Settlement Planning & Wealth Management Firm", title: "15% IT cost reduction while expanding the app portfolio", metric: "15%", metricLabel: "IT Spend Reduced", desc: "Audited the full technology landscape, eliminated redundant tools and vendor overlap, and reinvested savings into AI-powered internal tools, secure LLM middleware, and a re-architected data warehouse — delivering more capability for less budget in year one." },
+              { tag: "Global Real Estate Services Firm", title: "900-user global portfolio rationalized across 25+ applications", metric: "25+", metricLabel: "Apps Managed Globally", desc: "Managed and optimized a technology portfolio spanning 10 workstreams and 5 service lines across APAC, EMEA, and the Americas. Introduced hardened virtual desktops and a thin-client program that drastically cut hardware costs while strengthening security and compliance." },
+              { tag: "Real Estate Investment Manager", title: "Trusted technology advisor for a $7.1B investment firm", metric: "$7.1B", metricLabel: "Assets Under Management", desc: "Served as the senior technology leader overseeing infrastructure, cybersecurity, data warehouse, ERP, and strategic roadmap. Partnered directly with managing partners on technology strategy and budget forecasting to support the firm's continued growth." },
             ].map((cs, i) => (
               <RevealDiv key={i} delay={i * 0.1} style={{
                 background: T.white, borderRadius: 12, overflow: "hidden",
@@ -472,13 +474,13 @@ export default function TelepathSite() {
             <SectionLabel>About</SectionLabel>
             <SectionTitle>Technology leadership rooted in real-world experience.</SectionTitle>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: T.slate, margin: "0 0 24px" }}>
-              With over 15 years leading engineering teams at startups and Fortune 500 companies, I founded Telepath Technology Solutions to make executive-level technical leadership accessible to companies at every stage.
+              With over 25 years of hands-on technology leadership — from Fortune 500 companies like JLL and Compass Group to high-growth investment firms — I founded Telepath Technology Solutions to make seasoned, executive-level technical guidance accessible to companies at every stage.
             </p>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: T.slate, margin: "0 0 32px" }}>
-              I've scaled teams from 2 to 200, architected systems handling millions of transactions, and guided dozens of companies through critical technical inflection points — from first hire to IPO.
+              I've directed cross-functional teams across four continents, managed technology portfolios spanning dozens of enterprise applications, and driven measurable cost reductions while scaling capability. Whether it's building AI-powered tools, re-architecting a data warehouse, or cutting 15% from an IT budget, I bring strategy and execution together.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-              {[["15+", "Years in Tech Leadership"], ["50+", "Companies Advised"], ["$200M+", "Funding Guided"], ["99.9%", "Client Retention"]].map(([num, label], i) => (
+              {[["25+", "Years in Tech Leadership"], ["$7.1B", "Assets Supported"], ["900+", "Users Served Globally"], ["25+", "Enterprise Apps Managed"]].map(([num, label], i) => (
                 <div key={i} style={{ padding: 20, borderRadius: 10, background: T.light, border: `1px solid ${T.greenPale}` }}>
                   <div style={{ fontSize: 28, fontWeight: 700, color: T.green }}>{num}</div>
                   <div style={{ fontSize: 13, color: T.slate, marginTop: 4 }}>{label}</div>
@@ -489,38 +491,6 @@ export default function TelepathSite() {
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS ─── */}
-      <section id="testimonials" style={{ ...sectionPad, background: `linear-gradient(170deg, ${T.greenDk}, ${T.green})` }}>
-        <div style={container}>
-          <RevealDiv style={{ textAlign: "center", marginBottom: 56 }}>
-            <SectionLabel><span style={{ color: T.greenLt }}>Testimonials</span></SectionLabel>
-            <SectionTitle light>What clients are saying.</SectionTitle>
-          </RevealDiv>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
-            {[
-              { quote: "Hiring a full-time CTO would have cost us $300K+. Telepath gave us the same caliber of leadership at a fraction of the cost — and we closed our Series A because of it.", name: "Sarah Chen", role: "CEO, MedFlow Health" },
-              { quote: "Our engineering team went from chaotic to cohesive in three months. The frameworks and processes they put in place are still driving our success two years later.", name: "Marcus Rivera", role: "Founder, ShipStack" },
-              { quote: "When we needed SOC 2 compliance to close enterprise deals, Telepath didn't just guide us through it — they made our entire security posture a competitive advantage.", name: "Priya Patel", role: "COO, VaultPay" },
-            ].map((t, i) => (
-              <RevealDiv key={i} delay={i * 0.1} style={{
-                background: "rgba(255,255,255,0.1)",
-                backdropFilter: "blur(10px)",
-                borderRadius: 12, padding: 36,
-                border: "1px solid rgba(255,255,255,0.15)",
-              }}>
-                <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
-                  {[...Array(5)].map((_, j) => <Icon key={j} name="star" size={16}/>)}
-                </div>
-                <p style={{ fontSize: 16, lineHeight: 1.75, color: "rgba(255,255,255,0.9)", margin: "0 0 24px", fontStyle: "italic" }}>"{t.quote}"</p>
-                <div>
-                  <div style={{ fontWeight: 600, color: T.white, fontSize: 15 }}>{t.name}</div>
-                  <div style={{ color: T.greenLt, fontSize: 13, marginTop: 2 }}>{t.role}</div>
-                </div>
-              </RevealDiv>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── PRICING ─── */}
       <section id="pricing" style={{ ...sectionPad, background: T.white }}>
@@ -532,9 +502,9 @@ export default function TelepathSite() {
           </RevealDiv>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 28 }}>
             {[
-              { tier: "Advisory", hours: "8 hrs/month", features: ["Bi-weekly strategy sessions", "Async Slack access", "Architecture reviews", "Hiring consultation"], accent: false },
-              { tier: "Embedded", hours: "20 hrs/month", features: ["Weekly leadership meetings", "Daily Slack access", "Team mentoring", "Hands-on code reviews", "Board/investor prep"], accent: true },
-              { tier: "Intensive", hours: "40 hrs/month", features: ["Full CTO integration", "Daily standups", "Unlimited access", "Hiring & firing authority", "Roadmap ownership", "Vendor management"], accent: false },
+              { tier: "Advisory", tagline: "Strategic guidance on your schedule", features: ["Periodic strategy sessions", "Async access between sessions", "Architecture reviews", "Hiring consultation"], accent: false },
+              { tier: "Embedded", tagline: "A consistent presence on your team", features: ["Regular leadership meetings", "Ongoing access & availability", "Team mentoring", "Hands-on code reviews", "Board & investor prep"], accent: true },
+              { tier: "Intensive", tagline: "Fully integrated into your operations", features: ["Full CTO integration", "Daily standups & availability", "Hiring & firing authority", "Roadmap ownership", "Vendor management", "Cross-functional leadership"], accent: false },
             ].map((plan, i) => (
               <RevealDiv key={i} delay={i * 0.1} style={{
                 borderRadius: 14,
@@ -546,8 +516,8 @@ export default function TelepathSite() {
                 {plan.accent && <div style={{ padding: "10px 0", textAlign: "center", background: "rgba(0,0,0,0.12)", fontSize: 12, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: T.white }}>Most Popular</div>}
                 <div style={{ padding: plan.accent ? "32px 40px 40px" : 0 }}>
                   <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: 1, textTransform: "uppercase", color: plan.accent ? T.greenLt : T.green, marginBottom: 8 }}>{plan.tier}</div>
-                  <div style={{ fontSize: 13, color: plan.accent ? T.greenLt : T.slate, marginBottom: 28 }}>{plan.hours}</div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+                  <div style={{ fontSize: 15, color: plan.accent ? "rgba(255,255,255,0.85)" : T.slate, marginBottom: 28, fontStyle: "italic" }}>{plan.tagline}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                     {plan.features.map((f, j) => (
                       <div key={j} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: plan.accent ? "rgba(255,255,255,0.9)" : T.slate }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={plan.accent ? T.greenLt : T.green} strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -555,11 +525,14 @@ export default function TelepathSite() {
                       </div>
                     ))}
                   </div>
-                  <Btn variant={plan.accent ? "white" : "primary"} onClick={() => scrollTo("contact")} style={{ width: "100%", textAlign: "center" }}>Get Started</Btn>
                 </div>
               </RevealDiv>
             ))}
           </div>
+          <RevealDiv delay={0.35} style={{ textAlign: "center", marginTop: 48 }}>
+            <p style={{ fontSize: 17, color: T.slate, marginBottom: 20 }}>Every engagement is scoped to your needs. Let's find the right fit together.</p>
+            <Btn onClick={() => scrollTo("contact")}>Start a Conversation</Btn>
+          </RevealDiv>
         </div>
       </section>
 

@@ -181,6 +181,7 @@ function LogoMark({ size = 36 }: { size?: number }) {
 function Icon({ name, size = 24 }: { name: string; size?: number }) {
   const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const icons: Record<string, React.ReactNode> = {
+    linkedin: <svg viewBox="0 0 24 24" style={{...s, stroke: "none", fill: s.stroke}}><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>,
     ai: <svg viewBox="0 0 24 24" style={s}><path d="M12 2a6 6 0 00-6 6c0 2.22 1.21 4.16 3 5.2V15a1 1 0 001 1h4a1 1 0 001-1v-1.8c1.79-1.04 3-2.98 3-5.2a6 6 0 00-6-6z"/><line x1="10" y1="18" x2="14" y2="18"/><line x1="10" y1="20" x2="14" y2="20"/><line x1="11" y1="22" x2="13" y2="22"/><line x1="8" y1="6" x2="4" y2="4"/><line x1="16" y1="6" x2="20" y2="4"/><line x1="6" y1="10" x2="2" y2="10"/><line x1="18" y1="10" x2="22" y2="10"/></svg>,
     scissors: <svg viewBox="0 0 24 24" style={s}><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>,
     strategy: <svg viewBox="0 0 24 24" style={s}><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>,
@@ -310,9 +311,12 @@ export default function TelepathSite() {
               }}>{label}</button>
             ))}
           </div>
-          {/* Book a Call — hard right */}
-          <div style={{ flexShrink: 0 }} className="desktop-nav">
+          {/* Book a Call + LinkedIn — hard right */}
+          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 16 }} className="desktop-nav">
             <Btn onClick={() => scrollTo("contact")} style={{ padding: "10px 24px", fontSize: 14 }}>Book a Call</Btn>
+            <a href="http://www.linkedin.com/in/chris-pfeifer-9b029036" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", opacity: 0.6, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}>
+              <Icon name="linkedin" size={22}/>
+            </a>
           </div>
           {/* Mobile hamburger */}
           <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: 8 }} className="mobile-menu-btn">
@@ -432,7 +436,7 @@ export default function TelepathSite() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 28 }}>
             {[
               { tag: "Settlement Planning & Wealth Management Firm", title: "15% IT cost reduction while expanding the app portfolio", metric: "15%", metricLabel: "IT Spend Reduced", desc: "Audited the full technology landscape, eliminated redundant tools and vendor overlap, and reinvested savings into AI-powered internal tools, secure LLM middleware, and a re-architected data warehouse — delivering more capability for less budget in year one." },
-              { tag: "Global Real Estate Services Firm", title: "900-user global portfolio rationalized across 25+ applications", metric: "25+", metricLabel: "Apps Managed Globally", desc: "Managed and optimized a technology portfolio spanning 10 workstreams and 5 service lines across APAC, EMEA, and the Americas. Introduced hardened virtual desktops and a thin-client program that drastically cut hardware costs while strengthening security and compliance." },
+              { tag: "Global Real Estate Services Firm", title: "Multi-million-dollar tech incubator replicated by Fortune 500 clients", metric: "25+", metricLabel: "Apps Managed Globally", desc: "Designed and implemented a world-class technology incubator workspace that became a model for corporate workplace transformation. Rationalized a 25+ application portfolio across 900 users on four continents, introduced security controls that slashed hardware costs, and consulted with additional Fortune 500 clients seeking to replicate the approach." },
               { tag: "Real Estate Investment Manager", title: "Trusted technology advisor for a $7.1B investment firm", metric: "$7.1B", metricLabel: "Assets Under Management", desc: "Served as the senior technology leader overseeing infrastructure, cybersecurity, data warehouse, ERP, and strategic roadmap. Partnered directly with managing partners on technology strategy and budget forecasting to support the firm's continued growth." },
             ].map((cs, i) => (
               <RevealDiv key={i} delay={i * 0.1} style={{
@@ -474,10 +478,10 @@ export default function TelepathSite() {
             <SectionLabel>About</SectionLabel>
             <SectionTitle>Technology leadership rooted in real-world experience.</SectionTitle>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: T.slate, margin: "0 0 24px" }}>
-              With over 25 years of hands-on technology leadership — from Fortune 500 companies like JLL and Compass Group to high-growth investment firms — I founded Telepath Technology Solutions to make seasoned, executive-level technical guidance accessible to companies at every stage.
+              I started my career in a support queue, troubleshooting software for 2,000 field associates. Over 25 years I've worked through every layer of the stack — QA, enterprise deployments, product management, innovation strategy, and executive leadership at Fortune 500 companies and high-growth investment firms. I founded Telepath Technology Solutions because I believe companies at every stage deserve access to that depth of experience.
             </p>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: T.slate, margin: "0 0 32px" }}>
-              I've directed cross-functional teams across four continents, managed technology portfolios spanning dozens of enterprise applications, and driven measurable cost reductions while scaling capability. Whether it's building AI-powered tools, re-architecting a data warehouse, or cutting 15% from an IT budget, I bring strategy and execution together.
+              That journey means I don't just advise from the top — I understand what it takes at every level. Whether it's building AI-powered tools, designing a technology incubator that Fortune 500 clients want to replicate, or cutting 15% from an IT budget while growing the applications portfolio, I bring both the strategic vision and the hands-on instinct to make things work.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
               {[["25+", "Years in Tech Leadership"], ["$7.1B", "Assets Supported"], ["900+", "Users Served Globally"], ["25+", "Enterprise Apps Managed"]].map(([num, label], i) => (
@@ -616,7 +620,7 @@ export default function TelepathSite() {
             &copy; 2026 Telepath Technology Solutions LLC. All rights reserved.
           </div>
 
-          <div style={{ display: "flex", gap: 20, justifySelf: "end" }}>
+          <div style={{ display: "flex", gap: 20, alignItems: "center", justifySelf: "end" }}>
             {["Privacy Policy", "Terms of Service"].map((s) => (
               <span
                 key={s}
@@ -625,6 +629,9 @@ export default function TelepathSite() {
                 {s}
               </span>
             ))}
+            <a href="http://www.linkedin.com/in/chris-pfeifer-9b029036" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", opacity: 0.5, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.5"; }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill={T.silver} stroke="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
           </div>
         </div>
       </footer>

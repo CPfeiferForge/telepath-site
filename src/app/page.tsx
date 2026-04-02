@@ -462,7 +462,7 @@ export default function TelepathSite() {
 
       {/* ─── ABOUT ─── */}
       <section id="about" style={{ ...sectionPad, background: T.white }}>
-        <div style={{ ...container, display: "grid", gridTemplateColumns: "440px 1.2fr", gap: 60, alignItems: "start" }}>
+        <div style={{ ...container, display: "grid", gridTemplateColumns: "440px 1.2fr", gap: 60, alignItems: "end" }}>
           <RevealDiv>
             <div style={{
               width: "100%", borderRadius: 16,

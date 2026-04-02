@@ -181,6 +181,7 @@ function LogoMark({ size = 36 }: { size?: number }) {
 function Icon({ name, size = 24 }: { name: string; size?: number }) {
   const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const icons: Record<string, React.ReactNode> = {
+    ai: <svg viewBox="0 0 24 24" style={s}><path d="M12 2a6 6 0 00-6 6c0 2.22 1.21 4.16 3 5.2V15a1 1 0 001 1h4a1 1 0 001-1v-1.8c1.79-1.04 3-2.98 3-5.2a6 6 0 00-6-6z"/><line x1="10" y1="18" x2="14" y2="18"/><line x1="10" y1="20" x2="14" y2="20"/><line x1="11" y1="22" x2="13" y2="22"/><line x1="8" y1="6" x2="4" y2="4"/><line x1="16" y1="6" x2="20" y2="4"/><line x1="6" y1="10" x2="2" y2="10"/><line x1="18" y1="10" x2="22" y2="10"/></svg>,
     strategy: <svg viewBox="0 0 24 24" style={s}><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>,
     code: <svg viewBox="0 0 24 24" style={s}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
     shield: <svg viewBox="0 0 24 24" style={s}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
@@ -396,6 +397,7 @@ export default function TelepathSite() {
           </RevealDiv>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
             {[
+              { icon: "ai", title: "AI Solutions & Integration", desc: "Custom AI-powered internal tools, secure middleware for LLM API connections, database-integrated intelligent agents, and practical AI strategies that deliver real business value." },
               { icon: "strategy", title: "Technology Strategy", desc: "Roadmap development, tech stack evaluation, build-vs-buy analysis, and strategic planning aligned with your business goals." },
               { icon: "code", title: "Architecture & Engineering", desc: "System design, code reviews, technical debt assessment, and hands-on guidance for your development team." },
               { icon: "users", title: "Team Building & Leadership", desc: "Hiring strategy, engineering culture development, performance frameworks, and mentoring your technical leaders." },

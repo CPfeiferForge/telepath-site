@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/* ─── UPDATE ME: your public GitHub profile or repo URL ─── */
-export const GITHUB_URL = "https://github.com/UPDATE-ME";
+/* ─── Public GitHub profile ─── */
+export const GITHUB_URL = "https://github.com/CPfeiferForge";
 export const LINKEDIN_URL = "http://www.linkedin.com/in/chris-pfeifer-9b029036";
 
 /* ───────── palette matched to logo ───────── */

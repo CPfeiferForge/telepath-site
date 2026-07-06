@@ -1,4 +1,4 @@
-/* Reset defaults — all styling is handled inline by the Telepath component */
+/* Reset defaults — component styling is handled inline */
 *,
 *::before,
 *::after {
@@ -14,4 +14,40 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Site-wide animations (used by hero + logo) ─── */
+@keyframes pulse-scroll {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes telepath-pulse {
+  0%   { opacity: 0; transform: scale(1); }
+  15%  { opacity: 0.35; }
+  50%  { opacity: 0; transform: scale(3.1); }
+  100% { opacity: 0; transform: scale(3.1); }
+}
+
+/* ─── Responsive rules ─── */
+@media (max-width: 1024px) {
+  section > div {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: block !important; }
+}
+
+/* ─── Form + selection accents ─── */
+input:focus,
+textarea:focus {
+  border-color: #1D9E75 !important;
+}
+
+::selection {
+  background: #9FE1CB;
+  color: #2C2C2A;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { SiteNav, SiteFooter, CookieBanner } from "../components/site";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -17,9 +18,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Telepath Technology Solutions | Fractional CTO Services",
+  title: "Telepath Technology Solutions | IT Consulting & AI Development",
   description:
-    "Executive technology leadership without the executive price tag. Fractional CTO services for startups and scaling companies.",
+    "Full-spectrum IT consulting: AI development, cloud infrastructure, security, data, and fractional CTO leadership for companies that need senior technology depth without adding headcount.",
 };
 
 export default function RootLayout({
@@ -29,7 +30,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${dmSans.className} ${instrumentSerif.className}`}>{children}</body>
+      <body className={`${dmSans.className} ${instrumentSerif.className}`}>
+        <SiteNav />
+        {children}
+        <SiteFooter />
+        <CookieBanner />
+      </body>
     </html>
   );
 }

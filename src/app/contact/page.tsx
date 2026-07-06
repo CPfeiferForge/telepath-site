@@ -16,14 +16,22 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 6, letterSpacing: 0.5,
 };
 
+function Req() {
+  return <span style={{ color: T.green }} aria-hidden="true"> *</span>;
+}
+
+function Opt() {
+  return <span style={{ color: T.silver, fontWeight: 400, textTransform: "none" }}> (optional)</span>;
+}
+
 type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "", website: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "", preferred: "", website: "" });
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [key]: e.target.value }));
 
   const submit = async () => {
@@ -33,6 +41,12 @@ export default function ContactPage() {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setStatus("error");
       setErrorMsg("Please fill in your name, email, and a message.");
+      return;
+    }
+
+    if (form.preferred === "phone" && !form.phone.trim()) {
+      setStatus("error");
+      setErrorMsg("Please provide a phone number since it's your preferred contact method.");
       return;
     }
 
@@ -81,35 +95,47 @@ export default function ContactPage() {
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={T.green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: 16 }}><circle cx="12" cy="12" r="10"/><polyline points="8 12.5 11 15.5 16 9.5"/></svg>
                 <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 26, color: T.charcoal, marginBottom: 8 }}>Message sent</div>
                 <p style={{ fontSize: 16, lineHeight: 1.7, color: T.slate, margin: 0 }}>
-                  Thanks for reaching out — you&rsquo;ll hear back within one business day.
+                  Thanks for reaching out — you&rsquo;ll hear back within one business day. A confirmation is on its way to your inbox.
                 </p>
               </div>
             ) : (
               <div style={{ background: T.light, borderRadius: 14, padding: 40, border: `1px solid ${T.greenPale}`, position: "relative" }}>
-                {([
-                  { label: "Name", type: "text", key: "name" },
-                  { label: "Email", type: "email", key: "email" },
-                  { label: "Phone", type: "tel", key: "phone" },
-                  { label: "Company", type: "text", key: "company" },
-                ] as const).map((field) => (
-                  <div key={field.key} style={{ marginBottom: 20 }}>
-                    <label style={labelStyle}>{field.label}</label>
-                    <input
-                      type={field.type}
-                      value={form[field.key]}
-                      onChange={set(field.key)}
-                      style={inputStyle}
-                      placeholder={field.label === "Phone" ? "Your phone number" : `Your ${field.label.toLowerCase()}`}
-                    />
-                  </div>
-                ))}
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelStyle}>Name<Req/></label>
+                  <input type="text" value={form.name} onChange={set("name")} style={inputStyle} placeholder="Your name"/>
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelStyle}>Email<Req/></label>
+                  <input type="email" value={form.email} onChange={set("email")} style={inputStyle} placeholder="Your email"/>
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelStyle}>Phone<Opt/></label>
+                  <input type="tel" value={form.phone} onChange={set("phone")} style={inputStyle} placeholder="Your phone number"/>
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelStyle}>Company<Opt/></label>
+                  <input type="text" value={form.company} onChange={set("company")} style={inputStyle} placeholder="Your company"/>
+                </div>
+                <div style={{ marginBottom: 20 }}>
+                  <label style={labelStyle}>Preferred contact method<Opt/></label>
+                  <select
+                    value={form.preferred}
+                    onChange={set("preferred")}
+                    style={{ ...inputStyle, appearance: "auto", color: form.preferred ? T.charcoal : T.slate, cursor: "pointer" }}
+                  >
+                    <option value="">No preference</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                    <option value="either">Either works</option>
+                  </select>
+                </div>
                 {/* Honeypot — hidden from humans, bots fill it and get silently dropped */}
                 <div style={{ position: "absolute", left: -9999, top: -9999, height: 0, overflow: "hidden" }} aria-hidden="true">
                   <label>Website</label>
                   <input type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={set("website")} />
                 </div>
-                <div style={{ marginBottom: 24 }}>
-                  <label style={labelStyle}>How can we help?</label>
+                <div style={{ marginBottom: 8 }}>
+                  <label style={labelStyle}>How can we help?<Req/></label>
                   <textarea
                     rows={4}
                     value={form.message}
@@ -118,6 +144,7 @@ export default function ContactPage() {
                     placeholder="Tell us about your project..."
                   />
                 </div>
+                <div style={{ fontSize: 12, color: T.silver, marginBottom: 20 }}><span style={{ color: T.green }}>*</span> required</div>
                 {status === "error" && errorMsg && (
                   <div style={{ marginBottom: 20, padding: "12px 16px", borderRadius: 8, background: "#fdecea", border: "1px solid #f5c6c1", color: "#8a2a20", fontSize: 14, lineHeight: 1.5 }}>
                     {errorMsg}

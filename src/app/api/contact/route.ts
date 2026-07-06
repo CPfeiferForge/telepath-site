@@ -5,13 +5,14 @@ export const runtime = "nodejs";
 /*
  * Contact form → Microsoft Graph sendMail
  *
- * Required environment variables (Vercel → Project → Settings → Environment Variables,
- * and .env.local for local dev):
+ * Required environment variables:
  *   GRAPH_TENANT_ID     — Entra tenant ID (GUID)
  *   GRAPH_CLIENT_ID     — App registration (client) ID
  *   GRAPH_CLIENT_SECRET — Client secret value
- *   GRAPH_SENDER        — UPN of the mailbox that sends (e.g. noreply@telepathit.com)
- *   CONTACT_RECIPIENT   — Where submissions are delivered (e.g. chris@telepathit.com)
+ *   GRAPH_SENDER        — UPN of the mailbox that sends (e.g. info@telepathit.com)
+ *   CONTACT_RECIPIENT   — Where submissions are delivered (e.g. info@telepathit.com)
+ * Optional:
+ *   BOOKING_URL         — Microsoft Bookings page; if set, included in the auto-reply
  */
 
 const TOKEN_URL = (tenant: string) =>
@@ -58,7 +59,23 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+async function sendGraphMail(token: string, sender: string, mail: object): Promise<Response> {
+  return fetch(
+    `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(sender)}/sendMail`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mail),
+      cache: "no-store",
+    },
+  );
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CONTACT_METHODS = ["email", "phone", "either"] as const;
 
 export async function POST(req: Request) {
   let payload: Record<string, unknown>;
@@ -74,6 +91,8 @@ export async function POST(req: Request) {
   const company = String(payload.company ?? "").trim().slice(0, 200);
   const message = String(payload.message ?? "").trim().slice(0, 5000);
   const honeypot = String(payload.website ?? "").trim();
+  const preferredRaw = String(payload.preferred ?? "").trim().toLowerCase();
+  const preferred = (CONTACT_METHODS as readonly string[]).includes(preferredRaw) ? preferredRaw : "";
 
   // Honeypot: bots fill the hidden "website" field. Pretend success, send nothing.
   if (honeypot) {
@@ -83,6 +102,13 @@ export async function POST(req: Request) {
   if (!name || !message || !EMAIL_RE.test(email)) {
     return NextResponse.json(
       { ok: false, error: "Please provide your name, a valid email, and a message." },
+      { status: 400 },
+    );
+  }
+
+  if (preferred === "phone" && !phone) {
+    return NextResponse.json(
+      { ok: false, error: "Please provide a phone number since it's your preferred contact method." },
       { status: 400 },
     );
   }
@@ -97,14 +123,20 @@ export async function POST(req: Request) {
     );
   }
 
+  const preferredLabel =
+    preferred === "email" ? "Email" :
+    preferred === "phone" ? "Phone" :
+    preferred === "either" ? "Either email or phone" : "—";
+
   const rows: [string, string][] = [
     ["Name", name],
     ["Email", email],
     ["Phone", phone || "—"],
     ["Company", company || "—"],
+    ["Preferred contact", preferredLabel],
   ];
 
-  const html = `
+  const internalHtml = `
     <div style="font-family: Segoe UI, Arial, sans-serif; font-size: 14px; color: #2C2C2A;">
       <h2 style="color: #0F6E56; margin: 0 0 16px;">New inquiry via telepathit.com</h2>
       <table cellpadding="6" cellspacing="0" style="border-collapse: collapse;">
@@ -119,10 +151,10 @@ export async function POST(req: Request) {
       <p style="white-space: pre-wrap; margin: 0;">${escapeHtml(message)}</p>
     </div>`;
 
-  const mail = {
+  const internalMail = {
     message: {
       subject: `Telepath inquiry from ${name}${company ? ` (${company})` : ""}`,
-      body: { contentType: "HTML", content: html },
+      body: { contentType: "HTML", content: internalHtml },
       toRecipients: [{ emailAddress: { address: recipient } }],
       replyTo: [{ emailAddress: { address: email, name } }],
     },
@@ -131,18 +163,7 @@ export async function POST(req: Request) {
 
   try {
     const token = await getGraphToken();
-    const res = await fetch(
-      `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(sender)}/sendMail`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(mail),
-        cache: "no-store",
-      },
-    );
+    const res = await sendGraphMail(token, sender, internalMail);
 
     if (res.status !== 202) {
       const detail = await res.text();
@@ -151,6 +172,51 @@ export async function POST(req: Request) {
         { ok: false, error: "Your message could not be sent. Please email us directly." },
         { status: 502 },
       );
+    }
+
+    // Auto-reply to the submitter. Best-effort: its failure never fails the request.
+    try {
+      const bookingUrl = process.env.BOOKING_URL;
+      const bookingBlock = bookingUrl
+        ? `<p style="margin: 20px 0;">
+             If you'd like to skip the back-and-forth, you can book a free 30-minute discovery call directly on our calendar:
+           </p>
+           <p style="margin: 0 0 20px;">
+             <a href="${escapeHtml(bookingUrl)}" style="display: inline-block; background: #1D9E75; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600;">Book a Discovery Call</a>
+           </p>`
+        : "";
+
+      const autoReplyHtml = `
+        <div style="font-family: Segoe UI, Arial, sans-serif; font-size: 14px; color: #2C2C2A; max-width: 600px;">
+          <h2 style="color: #0F6E56; margin: 0 0 16px;">Thanks for reaching out, ${escapeHtml(name)}.</h2>
+          <p style="margin: 0 0 16px;">
+            Your message has been received and you'll hear back from Telepath Technology Solutions within one business day.
+          </p>
+          ${bookingBlock}
+          <p style="margin: 0 0 8px; color: #636e72;">For your records, here's what you sent:</p>
+          <blockquote style="margin: 0 0 20px; padding: 12px 16px; border-left: 3px solid #9FE1CB; background: #f8faf9; white-space: pre-wrap;">${escapeHtml(message)}</blockquote>
+          <p style="margin: 0;">
+            Talk soon,<br/>
+            <strong>Telepath Technology Solutions</strong><br/>
+            <a href="https://telepathit.com" style="color: #1D9E75;">telepathit.com</a>
+          </p>
+        </div>`;
+
+      const autoReply = {
+        message: {
+          subject: "We received your message — Telepath Technology Solutions",
+          body: { contentType: "HTML", content: autoReplyHtml },
+          toRecipients: [{ emailAddress: { address: email, name } }],
+        },
+        saveToSentItems: true,
+      };
+
+      const replyRes = await sendGraphMail(token, sender, autoReply);
+      if (replyRes.status !== 202) {
+        console.error(`Auto-reply failed: ${replyRes.status} ${await replyRes.text()}`);
+      }
+    } catch (autoErr) {
+      console.error("Auto-reply error:", autoErr);
     }
 
     return NextResponse.json({ ok: true });

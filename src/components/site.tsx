@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 /* ─── Public GitHub profile ─── */
 export const GITHUB_URL = "https://github.com/CPfeiferForge";
-export const LINKEDIN_URL = "http://www.linkedin.com/in/chris-pfeifer-9b029036";
+export const LINKEDIN_URL = "https://www.linkedin.com/company/telepath-technology-solutions/";
 
 /* ───────── palette matched to logo ───────── */
 export const T = {
@@ -149,7 +149,7 @@ export function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWord
           ))}
         </g>
         {showWordmark && (
-          <text x="340" y="240" textAnchor="middle" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="34" fontWeight="500" fill="#2C2C2A" letterSpacing="3" style={wmStyle}>TELEPATH <tspan fill="#1D9E75" fontWeight="600">IT SERVICES</tspan></text>
+          <text x="340" y="240" textAnchor="middle" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="34" fontWeight="500" fill="#2C2C2A" letterSpacing="3" style={wmStyle}>TELEPATH IT SERVICES</text>
         )}
       </svg>
     </div>
@@ -289,7 +289,7 @@ export function SiteNav() {
           {/* Logo — hard left */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}>
             <LogoMark size={34}/>
-            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16, letterSpacing: 2.5, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath <span style={{ color: T.green, fontWeight: 600 }}>IT Services</span></span>
+            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16, letterSpacing: 2.5, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath IT Services</span>
           </Link>
           {/* Desktop nav links — centered */}
           <div style={{ display: "flex", alignItems: "center", gap: 32, position: "absolute", left: "50%", transform: "translateX(-50%)" }} className="desktop-nav">
@@ -334,53 +334,47 @@ export function SiteNav() {
 /*  FOOTER — shared across all pages              */
 /* ═══════════════════════════════════════════════ */
 export function SiteFooter() {
+  const linkStyle: React.CSSProperties = {
+    fontSize: 14, color: T.silver, textDecoration: "none", transition: "color 0.2s",
+  };
+  const hover = {
+    onMouseEnter: (e: React.MouseEvent) => { (e.currentTarget as HTMLElement).style.color = T.white; },
+    onMouseLeave: (e: React.MouseEvent) => { (e.currentTarget as HTMLElement).style.color = T.silver; },
+  };
   return (
-    <footer style={{ background: T.charcoal, padding: "12px 0" }}>
-      <div
-        style={{
-          ...footerContainer,
-          display: "grid",
-          gridTemplateColumns: "auto 1fr auto",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 12, justifySelf: "start" }}>
-          <div style={{ transform: "translateY(-1px)" }}>
-            <LogoMark size={30} />
-          </div>
-          <span
-            style={{
-              fontFamily: "'Helvetica Neue', Arial, sans-serif",
-              fontWeight: 500,
-              fontSize: 18,
-              letterSpacing: 2,
-              color: T.white,
-              textTransform: "uppercase",
-              lineHeight: 1,
-            }}
-          >
-            Telepath
-          </span>
-        </div>
-
-        <div style={{ fontSize: 13, color: T.silver, justifySelf: "start" }}>
-          &copy; 2026 Telepath Technology Solutions LLC. All rights reserved.
-        </div>
-
-        <div style={{ display: "flex", gap: 20, alignItems: "center", justifySelf: "end" }}>
-          {["Privacy Policy", "Terms of Service"].map((s) => (
-            <span
-              key={s}
-              style={{ fontSize: 13, color: T.silver, cursor: "pointer" }}
-            >
-              {s}
+    <footer style={{ background: T.charcoal, fontFamily: "'DM Sans', sans-serif" }}>
+      <div style={{ ...footerContainer, maxWidth: 1600, paddingTop: 40, paddingBottom: 24 }}>
+        {/* Row 1: brand / page links / social */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
+            <div style={{ transform: "translateY(-1px)" }}>
+              <LogoMark size={30} />
+            </div>
+            <span style={{
+              fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16,
+              letterSpacing: 2, color: T.white, textTransform: "uppercase", lineHeight: 1, whiteSpace: "nowrap",
+            }}>
+              Telepath IT Services
             </span>
-          ))}
-          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: "flex", alignItems: "center", opacity: 0.5, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.5"; }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill={T.silver} stroke="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
+          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap" }}>
+            {NAV_LINKS.map(([href, label]) => (
+              <Link key={href} href={href} style={linkStyle} {...hover}>{label}</Link>
+            ))}
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: "flex", alignItems: "center", opacity: 0.6, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill={T.silver} stroke="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+        {/* Divider */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 28, paddingTop: 20, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+          <div style={{ fontSize: 13, color: T.silver }}>
+            &copy; 2026 Telepath Technology Solutions LLC. All rights reserved.
+          </div>
+          <div style={{ display: "flex", gap: 24 }}>
+            <Link href="/privacy" style={{ ...linkStyle, fontSize: 13 }} {...hover}>Privacy Policy</Link>
+            <Link href="/terms" style={{ ...linkStyle, fontSize: 13 }} {...hover}>Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>

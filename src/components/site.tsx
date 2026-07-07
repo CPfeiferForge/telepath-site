@@ -149,7 +149,7 @@ export function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWord
           ))}
         </g>
         {showWordmark && (
-          <text x="340" y="240" textAnchor="middle" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="34" fontWeight="500" fill="#2C2C2A" letterSpacing="3" style={wmStyle}>TELEPATH</text>
+          <text x="340" y="240" textAnchor="middle" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="34" fontWeight="500" fill="#2C2C2A" letterSpacing="3" style={wmStyle}>TELEPATH <tspan fill="#1D9E75" fontWeight="600">IT SERVICES</tspan></text>
         )}
       </svg>
     </div>
@@ -202,6 +202,8 @@ export function Icon({ name, size = 24 }: { name: string; size?: number }) {
     cloud: <svg viewBox="0 0 24 24" style={s}><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>,
     zap: <svg viewBox="0 0 24 24" style={s}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
     chart: <svg viewBox="0 0 24 24" style={s}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>,
+    repeat: <svg viewBox="0 0 24 24" style={s}><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>,
+    server: <svg viewBox="0 0 24 24" style={s}><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>,
     arrow: <svg viewBox="0 0 24 24" style={s}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
     check: <svg viewBox="0 0 24 24" style={s}><polyline points="20 6 9 17 4 12"/></svg>,
     mail: <svg viewBox="0 0 24 24" style={s}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>,
@@ -254,7 +256,7 @@ export function BtnLink({ children, href, variant = "primary", external = false,
 /* ═══════════════════════════════════════════════ */
 const NAV_LINKS: [string, string][] = [
   ["/", "About"],
-  ["/portfolio", "Portfolio"],
+  ["/services", "Services"],
   ["/contact", "Contact"],
 ];
 
@@ -287,7 +289,7 @@ export function SiteNav() {
           {/* Logo — hard left */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}>
             <LogoMark size={34}/>
-            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16, letterSpacing: 2.5, color: T.charcoal, textTransform: "uppercase" }}>Telepath</span>
+            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16, letterSpacing: 2.5, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath <span style={{ color: T.green, fontWeight: 600 }}>IT Services</span></span>
           </Link>
           {/* Desktop nav links — centered */}
           <div style={{ display: "flex", alignItems: "center", gap: 32, position: "absolute", left: "50%", transform: "translateX(-50%)" }} className="desktop-nav">
@@ -304,9 +306,6 @@ export function SiteNav() {
           {/* Book a Call + GitHub + LinkedIn — hard right */}
           <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 16 }} className="desktop-nav">
             <BtnLink href="/contact" style={{ padding: "10px 24px", fontSize: 14 }}>Book a Call</BtnLink>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ display: "flex", alignItems: "center", opacity: 0.6, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}>
-              <Icon name="github" size={21}/>
-            </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: "flex", alignItems: "center", opacity: 0.6, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}>
               <Icon name="linkedin" size={22}/>
             </a>
@@ -325,7 +324,6 @@ export function SiteNav() {
           {NAV_LINKS.map(([href, label]) => (
             <Link key={href} href={href} onClick={() => setMenuOpen(false)} style={{ background: "none", border: "none", fontSize: 20, fontWeight: 500, color: T.charcoal, cursor: "pointer", textDecoration: "none" }}>{label}</Link>
           ))}
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" style={{ fontSize: 20, fontWeight: 500, color: T.charcoal, textDecoration: "none" }}>GitHub</a>
         </div>
       )}
     </>
@@ -380,9 +378,6 @@ export function SiteFooter() {
               {s}
             </span>
           ))}
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ display: "flex", alignItems: "center", opacity: 0.5, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.5"; }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.silver} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          </a>
           <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: "flex", alignItems: "center", opacity: 0.5, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.5"; }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill={T.silver} stroke="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>

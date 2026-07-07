@@ -18,9 +18,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Telepath Technology Solutions | IT Consulting & AI Development",
+  title: "Telepath IT Services | Managed IT, AI Development & Consulting",
   description:
-    "Full-spectrum IT consulting: AI development, cloud infrastructure, security, data, and fractional CTO leadership for companies that need senior technology depth without adding headcount.",
+    "Full-spectrum IT services: managed IT, AI development, cloud, DevOps, security, data, and fractional CTO leadership. A single problem, a full project, or your entire IT operation.",
 };
 
 export default function RootLayout({

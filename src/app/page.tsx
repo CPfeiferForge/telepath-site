@@ -45,7 +45,7 @@ export default function AboutPage() {
         {/* Hero content — single column, centered */}
         <div style={{ ...container, position: "relative", zIndex: 1, paddingTop: 136, paddingBottom: 80, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <RevealDiv style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <SectionLabel>IT Consulting Services</SectionLabel>
+            <SectionLabel>Full-Spectrum IT Services</SectionLabel>
             <h1 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(40px, 5.5vw, 68px)", fontWeight: 400, lineHeight: 1.15, color: T.charcoal, margin: "0 0 24px", maxWidth: 860 }}>
               Technology consulting that thinks like an executive<br/>
               <span style={{ color: T.green }}>and builds like an engineer.</span>
@@ -55,7 +55,7 @@ export default function AboutPage() {
             </p>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
               <BtnLink href="/contact" style={{ minWidth: 232, textAlign: "center" }}>Book a Discovery Call</BtnLink>
-              <BtnLink href="/portfolio" variant="outline" style={{ minWidth: 232, textAlign: "center" }}>See the Work</BtnLink>
+              <BtnLink href="/services" variant="outline" style={{ minWidth: 232, textAlign: "center" }}>Explore Services</BtnLink>
             </div>
           </RevealDiv>
         </div>
@@ -65,37 +65,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── SERVICES ─── */}
+      {/* ─── WHAT WE DO ─── */}
       <section id="services" style={{ ...sectionPad, background: T.white }}>
         <div style={container}>
           <RevealDiv style={{ textAlign: "center", maxWidth: 680, margin: "0 auto 64px" }}>
-            <SectionLabel>Services</SectionLabel>
-            <SectionTitle>One consultancy, the full stack of services.</SectionTitle>
-            <p style={{ color: T.slate, fontSize: 17, lineHeight: 1.7 }}>Eight practice areas, one standard of depth. Start with a single project or hand us the keys — Telepath plugs in exactly where you need it.</p>
+            <SectionLabel>What We Do</SectionLabel>
+            <SectionTitle>One partner, three ways to engage.</SectionTitle>
           </RevealDiv>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28, marginBottom: 48 }}>
             {[
-              { icon: "ai", title: "AI Development & Integration", desc: "Custom AI applications built end to end: LLM-powered internal portals, secure API middleware, retrieval over your own data, document and presentation generation, and sandboxed code execution — designed to hold up in regulated environments." },
-              { icon: "strategy", title: "AI Strategy & Governance", desc: "Practical AI adoption frameworks: use-case identification, deployment lanes for sensitive data, risk assessment, and the policies and change controls that let regulated businesses say yes to AI safely." },
-              { icon: "users", title: "Fractional CTO Leadership", desc: "Executive technology leadership on a fractional basis — roadmap ownership, board and investor prep, hiring strategy, vendor management, and mentoring for your technical team." },
-              { icon: "cloud", title: "Cloud & Infrastructure", desc: "Cloud architecture, containerization, CI/CD pipelines, networking, DevOps strategy, cost optimization, and scalability planning — deep hands-on experience across the Azure ecosystem." },
-              { icon: "code", title: "Architecture & Engineering", desc: "System design, code reviews, technical debt assessment, full-stack development, and hands-on guidance for your development team." },
-              { icon: "shield", title: "Security & Compliance", desc: "Security audits, compliance roadmaps (SOC 2, HIPAA, GDPR, SEC/FFIEC), NIST-based risk assessments, vendor risk management, and incident response planning." },
-              { icon: "chart", title: "Data & Analytics", desc: "Data warehouse design, business intelligence dashboards, performance telemetry and monitoring, and turning operational data into decisions." },
-              { icon: "scissors", title: "Technology Audits & Cost Optimization", desc: "Comprehensive tech stack audits, elimination of redundant tools and licenses, vendor consolidation, and strategic cost reduction that streamlines operations without sacrificing capability." },
-            ].map((svc, i) => (
-              <RevealDiv key={i} delay={i * 0.08} style={{
+              { icon: "server", title: "Managed IT", desc: "Full ownership of your technology operations — monitoring, support, security, and administration as an ongoing partnership. Your IT department, without the department." },
+              { icon: "ai", title: "Projects & Engineering", desc: "AI development, cloud infrastructure, DevOps, and data — scoped, built, and shipped. From a single automation to a company-wide platform." },
+              { icon: "users", title: "Strategy & Leadership", desc: "Fractional CTO leadership, AI governance, security and compliance roadmaps, and technology audits. Executive depth, on your terms." },
+            ].map((pillar, i) => (
+              <RevealDiv key={i} delay={i * 0.1} style={{
                 background: T.light, borderRadius: 12, padding: 36,
-                border: `1px solid ${T.greenPale}`, transition: "all 0.3s ease", cursor: "default",
+                border: `1px solid ${T.greenPale}`, textAlign: "center",
               }}>
-                <div style={{ width: 48, height: 48, borderRadius: 10, background: T.greenPale, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
-                  <Icon name={svc.icon}/>
+                <div style={{ width: 52, height: 52, borderRadius: 10, background: T.greenPale, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                  <Icon name={pillar.icon} size={26}/>
                 </div>
-                <h3 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 22, fontWeight: 400, margin: "0 0 12px", color: T.charcoal }}>{svc.title}</h3>
-                <p style={{ fontSize: 15, lineHeight: 1.7, color: T.slate, margin: 0 }}>{svc.desc}</p>
+                <h3 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 24, fontWeight: 400, margin: "0 0 12px", color: T.charcoal }}>{pillar.title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.7, color: T.slate, margin: 0 }}>{pillar.desc}</p>
               </RevealDiv>
             ))}
           </div>
+          <RevealDiv style={{ textAlign: "center" }}>
+            <BtnLink href="/services" variant="outline">Explore All Services</BtnLink>
+          </RevealDiv>
         </div>
       </section>
 

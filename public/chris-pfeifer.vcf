@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Pfeifer;Chris;;;
+FN:Chris Pfeifer
+ORG:Telepath Technology Solutions LLC
+TITLE:Founder & CTO
+TEL;TYPE=CELL,VOICE:+1-704-930-3255
+EMAIL;TYPE=WORK:cpfeifer@telepathit.com
+URL:https://telepathit.com
+NOTE:Telepath IT Services — Managed IT, AI Development, Cloud & DevOps, Security, Fractional CTO
+END:VCARD

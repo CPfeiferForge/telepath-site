@@ -199,12 +199,12 @@ export function LogoMark({ size = 36 }: { size?: number }) {
   );
 }
 
-/* ═══ Canonical horizontal lockup: mark + wordmark in ONE SVG (alignment is geometric) ═══ */
-export function LogoLockup({ height = 42, color = T.charcoal }: { height?: number; color?: string }) {
-  const w = Math.round(height * (480 / 124));
+/* ═══ Canonical lockup: mark + single-line wordmark in ONE SVG ═══ */
+export function LogoLockup({ height = 40, color = T.charcoal }: { height?: number; color?: string }) {
+  const w = Math.round(height * (880 / 118));
   return (
-    <svg width={w} height={height} viewBox="0 0 480 124" fill="none" style={{ display: "block" }}>
-      <g transform="translate(88, 54)">
+    <svg width={w} height={height} viewBox="0 0 880 118" fill="none" style={{ display: "block" }}>
+      <g transform="translate(88, 56)">
         <line x1="-15" y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
         <line x1="15"  y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
         <line x1="-40" y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
@@ -237,8 +237,7 @@ export function LogoLockup({ height = 42, color = T.charcoal }: { height?: numbe
         <circle cx="-15" cy="-35" r="3"   fill="#9FE1CB"/>
         <circle cx="15"  cy="-35" r="3"   fill="#9FE1CB"/>
       </g>
-      <text x="200" y="60" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="600" fontSize="40" letterSpacing="7" fill={color}>TELEPATH</text>
-      <text x="200" y="97" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="500" fontSize="21" letterSpacing="10.5" fill={color}>IT SERVICES</text>
+      <text x="200" y="72" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="500" fontSize="43" letterSpacing="9" fill={color}>TELEPATH IT SERVICES</text>
     </svg>
   );
 }

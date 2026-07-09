@@ -163,7 +163,7 @@ export function LogoMark({ size = 36 }: { size?: number }) {
   // True brand mark geometry (matches signature/kit lockups). size = rendered height.
   const w = Math.round(size * 1.5);
   return (
-    <svg width={w} height={size} viewBox="-88 -46 176 118" fill="none">
+    <svg width={w} height={size} viewBox="-88 -46 176 118" fill="none" style={{ display: "block" }}>
       <line x1="-15" y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
       <line x1="15"  y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
       <line x1="-40" y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
@@ -362,9 +362,7 @@ export function SiteFooter() {
         {/* Row 1: brand / page links / social */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-            <div style={{ transform: "translateY(-1px)" }}>
-              <LogoMark size={30} />
-            </div>
+            <LogoMark size={30} />
             <span style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
               <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 600, fontSize: 16, letterSpacing: 3, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath</span>
               <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 9, letterSpacing: 4.1, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap", marginTop: 3 }}>IT Services</span>

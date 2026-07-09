@@ -160,29 +160,41 @@ export function AnimatedLogo({ showWordmark = true, maxWidth = 420 }: { showWord
 /*  COMPACT LOGO — static, for nav & footer       */
 /* ═══════════════════════════════════════════════ */
 export function LogoMark({ size = 36 }: { size?: number }) {
+  // True brand mark geometry (matches signature/kit lockups). size = rendered height.
+  const w = Math.round(size * 1.5);
   return (
-    <svg width={size} height={size} viewBox="0 0 36 36" fill="none">
-      <g transform="translate(18, 15)">
-        <line x1="-6"  y1="-13" x2="0"  y2="0"  stroke="#9FE1CB" strokeWidth="0.6" opacity="0.3"/>
-        <line x1="6"   y1="-13" x2="0"  y2="0"  stroke="#9FE1CB" strokeWidth="0.6" opacity="0.3"/>
-        <line x1="-15" y1="-7"  x2="0"  y2="0"  stroke="#1D9E75" strokeWidth="0.8" opacity="0.5"/>
-        <line x1="15"  y1="-7"  x2="0"  y2="0"  stroke="#1D9E75" strokeWidth="0.8" opacity="0.5"/>
-        <line x1="-15" y1="-7"  x2="15" y2="-7" stroke="#5DCAA5" strokeWidth="0.6" opacity="0.25"/>
-        <line x1="0"   y1="0"   x2="-11" y2="14" stroke="#1D9E75" strokeWidth="0.7" opacity="0.4"/>
-        <line x1="0"   y1="0"   x2="11"  y2="14" stroke="#1D9E75" strokeWidth="0.7" opacity="0.4"/>
-        <line x1="-15" y1="-7"  x2="-11" y2="14" stroke="#5DCAA5" strokeWidth="0.6" opacity="0.3"/>
-        <line x1="15"  y1="-7"  x2="11"  y2="14" stroke="#5DCAA5" strokeWidth="0.6" opacity="0.3"/>
-        <line x1="-11" y1="14"  x2="0"   y2="19" stroke="#0F6E56" strokeWidth="0.7" opacity="0.4"/>
-        <line x1="11"  y1="14"  x2="0"   y2="19" stroke="#0F6E56" strokeWidth="0.7" opacity="0.4"/>
-        <circle cx="0"   cy="0"   r="3.2" fill="#1D9E75"/>
-        <circle cx="-15" cy="-7"  r="2.2" fill="#5DCAA5"/>
-        <circle cx="15"  cy="-7"  r="2.2" fill="#5DCAA5"/>
-        <circle cx="-11" cy="14"  r="1.8" fill="#5DCAA5"/>
-        <circle cx="11"  cy="14"  r="1.8" fill="#5DCAA5"/>
-        <circle cx="0"   cy="19"  r="2"   fill="#0F6E56"/>
-        <circle cx="-6"  cy="-13" r="1.2" fill="#9FE1CB"/>
-        <circle cx="6"   cy="-13" r="1.2" fill="#9FE1CB"/>
-      </g>
+    <svg width={w} height={size} viewBox="-88 -46 176 118" fill="none">
+      <line x1="-15" y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+      <line x1="15"  y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+      <line x1="-40" y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
+      <line x1="40"  y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
+      <line x1="-15" y1="-35" x2="-40" y2="-20" stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+      <line x1="15"  y1="-35" x2="40"  y2="-20" stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+      <line x1="-40" y1="-20" x2="40"  y2="-20" stroke="#5DCAA5" strokeWidth="2.4" opacity="0.2"/>
+      <line x1="-75" y1="-10" x2="-40" y2="-20" stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+      <line x1="75"  y1="-10" x2="40"  y2="-20" stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+      <line x1="-60" y1="15"  x2="-40" y2="-20" stroke="#5DCAA5" strokeWidth="3"   opacity="0.3"/>
+      <line x1="60"  y1="15"  x2="40"  y2="-20" stroke="#5DCAA5" strokeWidth="3"   opacity="0.3"/>
+      <line x1="-75" y1="-10" x2="-60" y2="15"  stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+      <line x1="75"  y1="-10" x2="60"  y2="15"  stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+      <line x1="0"   y1="0"   x2="-30" y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+      <line x1="0"   y1="0"   x2="30"  y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+      <line x1="-60" y1="15"  x2="-30" y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+      <line x1="60"  y1="15"  x2="30"  y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+      <line x1="-30" y1="40"  x2="0"   y2="55"  stroke="#0F6E56" strokeWidth="3"   opacity="0.35"/>
+      <line x1="30"  y1="40"  x2="0"   y2="55"  stroke="#0F6E56" strokeWidth="3"   opacity="0.35"/>
+      <circle cx="0"   cy="0"   r="9"   fill="#1D9E75"/>
+      <circle cx="-40" cy="-20" r="6"   fill="#5DCAA5"/>
+      <circle cx="40"  cy="-20" r="6"   fill="#5DCAA5"/>
+      <circle cx="-60" cy="15"  r="7"   fill="#1D9E75"/>
+      <circle cx="60"  cy="15"  r="7"   fill="#1D9E75"/>
+      <circle cx="-30" cy="40"  r="5"   fill="#5DCAA5"/>
+      <circle cx="30"  cy="40"  r="5"   fill="#5DCAA5"/>
+      <circle cx="0"   cy="55"  r="6"   fill="#0F6E56"/>
+      <circle cx="-75" cy="-10" r="3.5" fill="#9FE1CB"/>
+      <circle cx="75"  cy="-10" r="3.5" fill="#9FE1CB"/>
+      <circle cx="-15" cy="-35" r="3"   fill="#9FE1CB"/>
+      <circle cx="15"  cy="-35" r="3"   fill="#9FE1CB"/>
     </svg>
   );
 }

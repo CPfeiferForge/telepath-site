@@ -237,7 +237,7 @@ export function LogoLockup({ height = 40, color = T.charcoal }: { height?: numbe
         <circle cx="-15" cy="-35" r="3"   fill="#9FE1CB"/>
         <circle cx="15"  cy="-35" r="3"   fill="#9FE1CB"/>
       </g>
-      <text x="200" y="72" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="500" fontSize="43" letterSpacing="9" fill={color}>TELEPATH IT SERVICES</text>
+      <text x="200" y="72" fontFamily="'Helvetica Neue', Arial, sans-serif" fontSize="43" letterSpacing="9" fill={color}><tspan fontWeight="700">TELEPATH</tspan><tspan fontWeight="400" dx="14">IT SERVICES</tspan></text>
     </svg>
   );
 }

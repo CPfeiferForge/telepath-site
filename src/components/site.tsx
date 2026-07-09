@@ -199,6 +199,50 @@ export function LogoMark({ size = 36 }: { size?: number }) {
   );
 }
 
+/* ═══ Canonical horizontal lockup: mark + wordmark in ONE SVG (alignment is geometric) ═══ */
+export function LogoLockup({ height = 42, color = T.charcoal }: { height?: number; color?: string }) {
+  const w = Math.round(height * (480 / 124));
+  return (
+    <svg width={w} height={height} viewBox="0 0 480 124" fill="none" style={{ display: "block" }}>
+      <g transform="translate(88, 54)">
+        <line x1="-15" y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+        <line x1="15"  y1="-35" x2="0"   y2="0"   stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+        <line x1="-40" y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
+        <line x1="40"  y1="-20" x2="0"   y2="0"   stroke="#1D9E75" strokeWidth="3.6" opacity="0.45"/>
+        <line x1="-15" y1="-35" x2="-40" y2="-20" stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+        <line x1="15"  y1="-35" x2="40"  y2="-20" stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+        <line x1="-40" y1="-20" x2="40"  y2="-20" stroke="#5DCAA5" strokeWidth="2.4" opacity="0.2"/>
+        <line x1="-75" y1="-10" x2="-40" y2="-20" stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+        <line x1="75"  y1="-10" x2="40"  y2="-20" stroke="#9FE1CB" strokeWidth="2.4" opacity="0.25"/>
+        <line x1="-60" y1="15"  x2="-40" y2="-20" stroke="#5DCAA5" strokeWidth="3"   opacity="0.3"/>
+        <line x1="60"  y1="15"  x2="40"  y2="-20" stroke="#5DCAA5" strokeWidth="3"   opacity="0.3"/>
+        <line x1="-75" y1="-10" x2="-60" y2="15"  stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+        <line x1="75"  y1="-10" x2="60"  y2="15"  stroke="#9FE1CB" strokeWidth="2.1" opacity="0.2"/>
+        <line x1="0"   y1="0"   x2="-30" y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+        <line x1="0"   y1="0"   x2="30"  y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+        <line x1="-60" y1="15"  x2="-30" y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+        <line x1="60"  y1="15"  x2="30"  y2="40"  stroke="#1D9E75" strokeWidth="3"   opacity="0.35"/>
+        <line x1="-30" y1="40"  x2="0"   y2="55"  stroke="#0F6E56" strokeWidth="3"   opacity="0.35"/>
+        <line x1="30"  y1="40"  x2="0"   y2="55"  stroke="#0F6E56" strokeWidth="3"   opacity="0.35"/>
+        <circle cx="0"   cy="0"   r="9"   fill="#1D9E75"/>
+        <circle cx="-40" cy="-20" r="6"   fill="#5DCAA5"/>
+        <circle cx="40"  cy="-20" r="6"   fill="#5DCAA5"/>
+        <circle cx="-60" cy="15"  r="7"   fill="#1D9E75"/>
+        <circle cx="60"  cy="15"  r="7"   fill="#1D9E75"/>
+        <circle cx="-30" cy="40"  r="5"   fill="#5DCAA5"/>
+        <circle cx="30"  cy="40"  r="5"   fill="#5DCAA5"/>
+        <circle cx="0"   cy="55"  r="6"   fill="#0F6E56"/>
+        <circle cx="-75" cy="-10" r="3.5" fill="#9FE1CB"/>
+        <circle cx="75"  cy="-10" r="3.5" fill="#9FE1CB"/>
+        <circle cx="-15" cy="-35" r="3"   fill="#9FE1CB"/>
+        <circle cx="15"  cy="-35" r="3"   fill="#9FE1CB"/>
+      </g>
+      <text x="200" y="60" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="600" fontSize="40" letterSpacing="7" fill={color}>TELEPATH</text>
+      <text x="200" y="97" fontFamily="'Helvetica Neue', Arial, sans-serif" fontWeight="500" fontSize="21" letterSpacing="10.5" fill={color}>IT SERVICES</text>
+    </svg>
+  );
+}
+
 /* ───────── Icons ───────── */
 export function Icon({ name, size = 24 }: { name: string; size?: number }) {
   const s = { width: size, height: size, stroke: T.green, strokeWidth: 1.5, fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -300,11 +344,7 @@ export function SiteNav() {
         <div style={{ ...navContainer, display: "flex", alignItems: "center", justifyContent: "space-between", position: "relative" }}>
           {/* Logo — hard left */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}>
-            <LogoMark size={34}/>
-            <span style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: 3, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath</span>
-              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 9.5, letterSpacing: 4.4, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap", marginTop: 3 }}>IT Services</span>
-            </span>
+            <LogoLockup height={44}/>
           </Link>
           {/* Desktop nav links — centered */}
           <div style={{ display: "flex", alignItems: "center", gap: 32, position: "absolute", left: "50%", transform: "translateX(-50%)" }} className="desktop-nav">
@@ -362,11 +402,7 @@ export function SiteFooter() {
         {/* Row 1: brand / page links / social */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-            <LogoMark size={30} />
-            <span style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 600, fontSize: 16, letterSpacing: 3, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath</span>
-              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 9, letterSpacing: 4.1, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap", marginTop: 3 }}>IT Services</span>
-            </span>
+            <LogoLockup height={40} color={T.white}/>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap" }}>
             {NAV_LINKS.map(([href, label]) => (

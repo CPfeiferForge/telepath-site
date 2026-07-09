@@ -397,7 +397,7 @@ export function SiteFooter() {
   };
   return (
     <footer style={{ background: T.charcoal, fontFamily: "'DM Sans', sans-serif" }}>
-      <div style={{ ...footerContainer, maxWidth: 1600, paddingTop: 40, paddingBottom: 24 }}>
+      <div style={{ ...footerContainer, paddingTop: 40, paddingBottom: 24 }}>
         {/* Row 1: brand / page links / social */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>

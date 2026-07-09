@@ -289,7 +289,10 @@ export function SiteNav() {
           {/* Logo — hard left */}
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}>
             <LogoMark size={34}/>
-            <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16, letterSpacing: 2.5, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath IT Services</span>
+            <span style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
+              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: 3, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath</span>
+              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 9.5, letterSpacing: 4.4, color: T.charcoal, textTransform: "uppercase", whiteSpace: "nowrap", marginTop: 3 }}>IT Services</span>
+            </span>
           </Link>
           {/* Desktop nav links — centered */}
           <div style={{ display: "flex", alignItems: "center", gap: 32, position: "absolute", left: "50%", transform: "translateX(-50%)" }} className="desktop-nav">
@@ -350,11 +353,9 @@ export function SiteFooter() {
             <div style={{ transform: "translateY(-1px)" }}>
               <LogoMark size={30} />
             </div>
-            <span style={{
-              fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 16,
-              letterSpacing: 2, color: T.white, textTransform: "uppercase", lineHeight: 1, whiteSpace: "nowrap",
-            }}>
-              Telepath IT Services
+            <span style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
+              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 600, fontSize: 16, letterSpacing: 3, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap" }}>Telepath</span>
+              <span style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif", fontWeight: 500, fontSize: 9, letterSpacing: 4.1, color: T.white, textTransform: "uppercase", whiteSpace: "nowrap", marginTop: 3 }}>IT Services</span>
             </span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap" }}>

@@ -1,5 +1,5 @@
 "use client";
-import { T, LogoMark, LINKEDIN_URL } from "../../components/site";
+import { T, LogoMark, LINKEDIN_URL, BOOKING_PAGE_URL } from "../../components/site";
 
 const PHONE = "+1-704-930-3255";
 const EMAIL = "cpfeifer@telepathit.com";
@@ -74,7 +74,7 @@ export default function CardPage() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill={T.green} stroke="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
           </CardButton>
-          <CardButton href="/contact">
+          <CardButton href={BOOKING_PAGE_URL}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Book a Discovery Call
           </CardButton>

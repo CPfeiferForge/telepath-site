@@ -54,7 +54,7 @@ export default function AboutPage() {
               Whether you need a single problem solved, a system built, or your entire IT operation managed, Telepath brings the same senior-level depth — AI development, cloud, security, data, and fractional CTO leadership — scaled to fit.
             </p>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-              <BtnLink href="/contact" style={{ minWidth: 232, textAlign: "center" }}>Book a Discovery Call</BtnLink>
+              <BtnLink href="/contact" style={{ minWidth: 232, textAlign: "center" }}>Start a Conversation</BtnLink>
               <BtnLink href="/services" variant="outline" style={{ minWidth: 232, textAlign: "center" }}>Explore Services</BtnLink>
             </div>
           </RevealDiv>
@@ -134,7 +134,7 @@ export default function AboutPage() {
               Book a free 30-minute discovery call to discuss your needs and explore whether Telepath is the right fit.
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <BtnLink href="/contact">Book a Discovery Call</BtnLink>
+              <BtnLink href="/contact">Get in Touch</BtnLink>
             </div>
           </RevealDiv>
         </div>

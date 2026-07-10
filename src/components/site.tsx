@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 /* ─── Public GitHub profile ─── */
 export const GITHUB_URL = "https://github.com/CPfeiferForge";
+export const BOOKING_PAGE_URL = "https://outlook.office.com/book/TelepathTechnologySolutions@telepathit.com/?ismsaljsauthenabled";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/telepath-technology-solutions/";
 
 /* ───────── palette matched to logo ───────── */
@@ -359,7 +360,7 @@ export function SiteNav() {
           </div>
           {/* Book a Call + GitHub + LinkedIn — hard right */}
           <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 16 }} className="desktop-nav">
-            <BtnLink href="/contact" style={{ padding: "10px 24px", fontSize: 14 }}>Book a Call</BtnLink>
+            <BtnLink href="/contact" style={{ padding: "10px 24px", fontSize: 14 }}>Let&rsquo;s Talk</BtnLink>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: "flex", alignItems: "center", opacity: 0.6, transition: "opacity 0.2s" }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; }} onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = "0.6"; }}>
               <Icon name="linkedin" size={22}/>
             </a>

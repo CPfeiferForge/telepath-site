@@ -188,9 +188,9 @@ export async function POST(req: Request) {
 
       const autoReplyHtml = `
         <div style="font-family: Segoe UI, Arial, sans-serif; font-size: 14px; color: #2C2C2A; max-width: 600px;">
-          <h2 style="color: #0F6E56; margin: 0 0 16px;">Thanks for reaching out, ${escapeHtml(name)}.</h2>
+          <h2 style="color: #0F6E56; margin: 0 0 16px;">Thanks for reaching out!</h2>
           <p style="margin: 0 0 16px;">
-            Your message has been received and you'll hear back from Telepath Technology Solutions within one business day.
+            Your message has been received and you'll hear back from us very soon.
           </p>
           ${bookingBlock}
           <p style="margin: 0 0 8px; color: #636e72;">For your records, here's what you sent:</p>

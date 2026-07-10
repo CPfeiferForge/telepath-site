@@ -80,7 +80,7 @@ export default function ContactPage() {
             <SectionLabel>Contact</SectionLabel>
             <SectionTitle>Let&rsquo;s talk about your technology challenges.</SectionTitle>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: T.slate, margin: 0 }}>
-              Book a free 30-minute discovery call to discuss your needs and explore whether Telepath is the right fit.
+              Tell us a bit about your needs and we&rsquo;ll set up a free 30-minute discovery call to explore whether Telepath is the right fit.
             </p>
           </RevealDiv>
         </div>

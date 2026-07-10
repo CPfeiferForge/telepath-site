@@ -105,8 +105,8 @@ export default function ServicesPage() {
       <section style={{ paddingTop: 0, paddingBottom: 100, background: T.bg }}>
         <div style={{ ...container, textAlign: "center" }}>
           <RevealDiv style={{ maxWidth: 560, margin: "0 auto" }}>
-            <p style={{ fontSize: 17, color: T.slate, marginBottom: 20 }}>Not sure which engagement fits? That&rsquo;s what the discovery call is for.</p>
-            <BtnLink href="/contact">Book a Discovery Call</BtnLink>
+            <p style={{ fontSize: 17, color: T.slate, marginBottom: 20 }}>Not sure which engagement fits? Tell us what you&rsquo;re facing and we&rsquo;ll figure it out together.</p>
+            <BtnLink href="/contact">Get in Touch</BtnLink>
           </RevealDiv>
         </div>
       </section>
